@@ -27,7 +27,7 @@ spec:
     metadata:
       name: addon-{{name}}-kf-volumes-web-app
       annotations:
-        {} # argocd.argoproj.io/sync-wave: "100"
+        argocd.argoproj.io/sync-wave: "100"
     spec:
       project: default
       source:
