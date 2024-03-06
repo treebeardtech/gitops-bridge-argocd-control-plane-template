@@ -28,6 +28,8 @@ spec:
       name: addon-{{name}}-kf-admission-webhook
       annotations:
         argocd.argoproj.io/sync-wave: "100"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io    spec:
     spec:
       project: default
       source:

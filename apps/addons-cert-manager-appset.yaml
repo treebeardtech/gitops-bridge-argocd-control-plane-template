@@ -43,6 +43,8 @@ spec:
       name: addon-{{name}}-{{values.addonChart}}
       annotations:
         argocd.argoproj.io/sync-wave: "-25"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: default
       sources:
