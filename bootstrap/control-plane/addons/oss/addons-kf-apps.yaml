@@ -17,14 +17,12 @@ spec:
               selector:
                 matchLabels:
                   environment: staging
-              values:
-                addonChartVersion: v23.9.1
+              values: {}
           - clusters:
               selector:
                 matchLabels:
                   environment: prod
-              values:
-                addonChartVersion: v23.9.1
+              values: {}
   template:
     metadata:
       name: addon-{{name}}-kf-central-dashboard
