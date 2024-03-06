@@ -51,7 +51,7 @@ spec:
             releaseName: '{{values.addonChart}}'
             ignoreMissingValueFiles: true
       destination:
-        namespace: '{{values.namespace}}'
+        namespace: '{{values.addonChart}}'
         name: '{{name}}'
       syncPolicy:
         automated: {}
