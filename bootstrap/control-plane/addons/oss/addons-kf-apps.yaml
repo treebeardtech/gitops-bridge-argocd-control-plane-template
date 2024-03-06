@@ -26,11 +26,8 @@ spec:
                 addonChartVersion: v23.9.1
   template:
     metadata:
-      name: addon-{{name}}
+      name: addon-{{name}}-kf-central-dashboard
     spec:
-      destination:
-        namespace: kubeflow
-        server: https://kubernetes.default.svc
       project: default
       source:
         path: apps/centraldashboard/upstream/overlays/kserve
@@ -76,7 +73,12 @@ spec:
                         }
                       ]
                   }
-    operation:
-      sync:
-        syncStrategy:
-          apply: {}
+      destination:
+        namespace: '{{values.addonChart}}'
+        name: '{{name}}'
+      syncPolicy:
+        automated:
+          prune: false
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true  # Big CRDs.
