@@ -31,7 +31,7 @@ spec:
     metadata:
       name: addon-{{name}}-kf-istiod
       annotations:
-        argocd.argoproj.io/sync-wave: "-9"
+        argocd.argoproj.io/sync-wave: "-15"
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
