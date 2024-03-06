@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: addons-kf-istio-base2
+  name: addons-kf-istio-base3
 spec:
   syncPolicy:
     preserveResourcesOnDeletion: true
@@ -48,7 +48,7 @@ spec:
             values: ""
       destination:
         namespace: '{{values.namespace}}'
-        name: '{{name}}2'
+        name: '{{name}}'
       syncPolicy:
 #        automated:
 #          prune: false
