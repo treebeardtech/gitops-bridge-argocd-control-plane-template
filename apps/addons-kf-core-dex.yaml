@@ -40,8 +40,8 @@ spec:
         namespace: '{{values.namespace}}'
         name: '{{name}}'
       syncPolicy:
-#        automated:
-#          prune: false
+       automated:
+         prune: false
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true  # Big CRDs.
