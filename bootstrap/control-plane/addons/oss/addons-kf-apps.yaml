@@ -76,6 +76,7 @@ spec:
                   }
       destination:
         namespace: '{{values.namespace}}'
+        name: '{{name}}'
       syncPolicy:
         automated:
           prune: false
