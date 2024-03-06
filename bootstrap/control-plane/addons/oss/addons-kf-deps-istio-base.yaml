@@ -54,3 +54,4 @@ spec:
 #          prune: false
         syncOptions:
           - ServerSideApply=true  # Big CRDs.
+          - CreateNamespace=true
