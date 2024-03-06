@@ -1,59 +1,82 @@
+---
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: centraldashboard
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  name: addons-kf-central-dashboard
 spec:
-  destination:
-    namespace: kubeflow
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: apps/centraldashboard/upstream/overlays/kserve
-    repoURL: https://github.com/kubeflow/manifests
-    targetRevision: 776d4f4
-    kustomize:
-      patches:
-      - target:
-          kind: ConfigMap
-          name: centraldashboard-config
-        patch: |-
-          - op: replace
-            path: /data/links
-            value: |
-              {
-                "menuLinks": [
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+    - merge:
+        mergeKeys: [server]
+        generators:
+          - clusters:
+              values: {}
+          - clusters:
+              selector:
+                matchLabels:
+                  environment: staging
+              values:
+                addonChartVersion: v23.9.1
+          - clusters:
+              selector:
+                matchLabels:
+                  environment: prod
+              values:
+                addonChartVersion: v23.9.1
+  template:
+    metadata:
+      name: addon-{{name}}
+    spec:
+      destination:
+        namespace: kubeflow
+        server: https://kubernetes.default.svc
+      project: default
+      source:
+        path: apps/centraldashboard/upstream/overlays/kserve
+        repoURL: https://github.com/kubeflow/manifests
+        targetRevision: 776d4f4
+        kustomize:
+          patches:
+          - target:
+              kind: ConfigMap
+              name: centraldashboard-config
+            patch: |-
+              - op: replace
+                path: /data/links
+                value: |
                   {
-                    "type": "item",
-                    "link": "/jupyter/",
-                    "text": "Notebooks",
-                    "icon": "book"
-                  },
-                  {
-                    "type": "item",
-                    "link": "/volumes/",
-                    "text": "Volumes",
-                    "icon": "device:storage"
+                    "menuLinks": [
+                      {
+                        "type": "item",
+                        "link": "/jupyter/",
+                        "text": "Notebooks",
+                        "icon": "book"
+                      },
+                      {
+                        "type": "item",
+                        "link": "/volumes/",
+                        "text": "Volumes",
+                        "icon": "device:storage"
+                      }
+                    ],
+                    "externalLinks": [ ],
+                      "quickLinks": [
+                        {
+                          "text": "Create a new Notebook server",
+                          "desc": "Notebook Servers",
+                          "link": "/jupyter/new?namespace=kubeflow"
+                        }
+                      ],
+                      "documentationItems": [
+                        {
+                          "text": "Getting Started with Kubeflow",
+                          "desc": "Get your machine-learning workflow up and running on Kubeflow",
+                          "link": "https://www.kubeflow.org/docs/started/getting-started/"
+                        }
+                      ]
                   }
-                ],
-                "externalLinks": [ ],
-                  "quickLinks": [
-                    {
-                      "text": "Create a new Notebook server",
-                      "desc": "Notebook Servers",
-                      "link": "/jupyter/new?namespace=kubeflow"
-                    }
-                  ],
-                  "documentationItems": [
-                    {
-                      "text": "Getting Started with Kubeflow",
-                      "desc": "Get your machine-learning workflow up and running on Kubeflow",
-                      "link": "https://www.kubeflow.org/docs/started/getting-started/"
-                    }
-                  ]
-              }
-operation:
-  sync:
-    syncStrategy:
-      apply: {}
+    operation:
+      sync:
+        syncStrategy:
+          apply: {}
