@@ -45,7 +45,7 @@ spec:
           repoURL: '{{values.addonChartRepository}}'
           targetRevision: '{{values.addonChartVersion}}'
           helm:
-            releaseName: '{{values..name}}'
+            releaseName: '{{values.name}}'
             ignoreMissingValueFiles: true
             valueFiles: []
             values: |
