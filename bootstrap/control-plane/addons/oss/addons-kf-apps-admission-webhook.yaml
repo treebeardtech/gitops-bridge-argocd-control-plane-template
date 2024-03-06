@@ -1,0 +1,43 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: addons-kf-admission-webhook
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+    - merge:
+        mergeKeys: [server]
+        generators:
+          - clusters:
+              values:
+                namespace: kubeflow
+          - clusters:
+              selector:
+                matchLabels:
+                  environment: staging
+              values: {}
+          - clusters:
+              selector:
+                matchLabels:
+                  environment: prod
+              values: {}
+  template:
+    metadata:
+      name: addon-{{name}}-kf-admission-webhook
+    spec:
+      project: default
+      source:
+        path: apps/admission-webhook/upstream/overlays/cert-manager
+        repoURL: https://github.com/kubeflow/manifests
+        targetRevision: 776d4f4
+      destination:
+        namespace: '{{values.namespace}}'
+        name: '{{name}}'
+      syncPolicy:
+        automated:
+          prune: false
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true  # Big CRDs.
