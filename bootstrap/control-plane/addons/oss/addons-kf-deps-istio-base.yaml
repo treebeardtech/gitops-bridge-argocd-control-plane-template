@@ -48,7 +48,7 @@ spec:
             values: ""
       destination:
         namespace: '{{values.namespace}}'
-        name: '{{name}}'
+        name: '{{name}}2'
       syncPolicy:
 #        automated:
 #          prune: false
