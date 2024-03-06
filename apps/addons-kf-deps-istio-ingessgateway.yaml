@@ -14,6 +14,7 @@ spec:
               values:
                 namespace: istio-system
                 addonChart: gateway
+                name: istio-ingressgateway
                 # anything not staging or prod use this version
                 addonChartVersion: "1.18.7"
                 addonChartRepository: "https://istio-release.storage.googleapis.com/charts"
@@ -44,7 +45,7 @@ spec:
           repoURL: '{{values.addonChartRepository}}'
           targetRevision: '{{values.addonChartVersion}}'
           helm:
-            releaseName: '{{values.addonChart}}'
+            releaseName: '{{values..name}}'
             ignoreMissingValueFiles: true
             valueFiles: []
             values: |
