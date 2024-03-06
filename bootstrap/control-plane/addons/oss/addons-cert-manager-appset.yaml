@@ -50,6 +50,8 @@ spec:
           helm:
             releaseName: '{{values.addonChart}}'
             ignoreMissingValueFiles: true
+            values: |
+              installCRDs: true
       destination:
         namespace: '{{values.addonChart}}'
         name: '{{name}}'
