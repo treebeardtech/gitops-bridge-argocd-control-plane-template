@@ -1,4 +1,5 @@
 ---
+# TODO, ensure istio injection is enabled before installing apps
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:

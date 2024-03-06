@@ -26,6 +26,8 @@ spec:
   template:
     metadata:
       name: addon-{{name}}-kf-central-dashboard
+      annotations:
+        argocd.argoproj.io/sync-wave: "100"
     spec:
       project: default
       source:
@@ -79,5 +81,4 @@ spec:
         automated:
           prune: false
         syncOptions:
-          - CreateNamespace=true
           - ServerSideApply=true  # Big CRDs.

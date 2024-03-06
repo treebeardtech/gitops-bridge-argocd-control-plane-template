@@ -26,6 +26,8 @@ spec:
   template:
     metadata:
       name: addon-{{name}}-kf-core-kubeflow-roles
+      annotations:
+        argocd.argoproj.io/sync-wave: "10"
     spec:
       project: default
       source:
@@ -39,5 +41,4 @@ spec:
         automated:
           prune: false
         syncOptions:
-          - CreateNamespace=true
           - ServerSideApply=true  # Big CRDs.

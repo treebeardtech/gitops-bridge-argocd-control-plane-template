@@ -26,6 +26,8 @@ spec:
   template:
     metadata:
       name: addon-{{name}}-kf-core-dex
+      annotations:
+        argocd.argoproj.io/sync-wave: "10"
     spec:
       project: default
       source:
