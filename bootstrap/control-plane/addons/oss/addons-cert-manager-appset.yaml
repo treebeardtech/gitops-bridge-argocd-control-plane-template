@@ -53,8 +53,8 @@ spec:
       destination:
         namespace: '{{values.addonChart}}'
         name: '{{name}}'
-      syncPolicy:
-        automated: {}
+      # syncPolicy:
+      #   automated: {}
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true  # Big CRDs.

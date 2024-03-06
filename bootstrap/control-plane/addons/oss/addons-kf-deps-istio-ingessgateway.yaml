@@ -13,7 +13,7 @@ spec:
           - clusters:
               values:
                 namespace: istio-system
-                addonChart: istio-ingressgateway
+                addonChart: gateway
                 # anything not staging or prod use this version
                 addonChartVersion: "1.18.7"
                 addonChartRepository: "https://istio-release.storage.googleapis.com/charts"
