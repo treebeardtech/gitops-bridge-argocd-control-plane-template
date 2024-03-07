@@ -51,7 +51,7 @@ spec:
                   ]
               }
   destination:
-    namespace: argocd
+    namespace: argo-cd
     name: in-cluster
   syncPolicy:
     automated:
