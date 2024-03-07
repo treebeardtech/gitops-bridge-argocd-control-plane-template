@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: notebook-controller
+  name: istio-resources
   annotations:
     argocd.argoproj.io/sync-wave: "10"
   finalizers:
@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    path: apps/jupyter/notebook-controller/upstream/overlays/kubeflow
+    path: common/istio-1-17/kubeflow-istio-resources/base
     repoURL: https://github.com/kubeflow/manifests
     targetRevision: 776d4f4
   destination:

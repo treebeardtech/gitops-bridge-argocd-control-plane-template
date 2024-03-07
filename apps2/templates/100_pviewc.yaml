@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pvcviewer-controller
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    path: apps/pvcviewer-controller/upstream/default
+    repoURL: https://github.com/kubeflow/manifests
+    targetRevision: 776d4f4
+  destination:
+    namespace: argo-cd
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: false
+    syncOptions:
+      - ServerSideApply=true  # Big CRDs.
