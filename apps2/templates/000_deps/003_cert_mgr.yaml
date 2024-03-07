@@ -11,7 +11,7 @@ spec:
   sources:
     - chart: 'cert-manager'
       repoURL: https://charts.jetstack.io'
-      targetRevision: "1.18.7"
+      targetRevision: "1.14.3"
       helm:
         releaseName: "cert-manager"
         ignoreMissingValueFiles: true
