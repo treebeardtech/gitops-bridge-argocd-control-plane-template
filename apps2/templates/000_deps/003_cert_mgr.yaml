@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 003-cert-manager
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - chart: 'cert-manager'
+      repoURL: https://charts.jetstack.io'
+      targetRevision: "1.18.7"
+      helm:
+        releaseName: "cert-manager"
+        ignoreMissingValueFiles: true
+        valueFiles: []
+  destination:
+    namespace: 'cert-manager'
+    name: 'in-cluster'
+  syncPolicy:
+    automated:
+      prune: false
+    syncOptions:
+      - ServerSideApply=true  # Big CRDs.

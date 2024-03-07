@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 004-istiod
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - chart: 'istiod'
+      repoURL: 'https://istio-release.storage.googleapis.com/charts'
+      targetRevision: "1.18.7"
+      helm:
+        releaseName: "istiod"
+        ignoreMissingValueFiles: true
+        valueFiles: []
+        values: |
+          pilot:
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+          global:
+            proxy:
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 64Mi
+  destination:
+    namespace: 'istio-system'
+    name: 'in-cluster'
+  syncPolicy:
+    automated:
+      prune: false
+    syncOptions:
+      - ServerSideApply=true  # Big CRDs.

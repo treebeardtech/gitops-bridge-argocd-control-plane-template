@@ -1,10 +1,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: 006-deps-finished
+  name: 005-deps-finished
   namespace: argo-cd
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   template:
     spec:
