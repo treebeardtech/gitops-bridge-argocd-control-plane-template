@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: profiles
+  name: 100-profiles
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   finalizers:

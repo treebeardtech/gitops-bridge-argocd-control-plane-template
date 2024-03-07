@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: central-dashboard
+  name: 100-central-dashboard
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:

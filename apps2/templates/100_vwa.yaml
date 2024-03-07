@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: volumes-web-app
+  name: 100-volumes-web-app
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   finalizers:
