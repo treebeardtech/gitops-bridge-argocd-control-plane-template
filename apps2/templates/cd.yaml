@@ -4,6 +4,8 @@ metadata:
   name: central-dashboard
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "900"
 spec:
   project: default
   source:
