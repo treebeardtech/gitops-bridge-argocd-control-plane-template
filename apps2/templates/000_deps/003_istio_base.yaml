@@ -23,4 +23,5 @@ spec:
     automated:
       prune: false
     syncOptions:
+      - CreateNamespace=true
       - ServerSideApply=true  # Big CRDs.
