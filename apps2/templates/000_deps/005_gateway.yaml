@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 008-gateway
+  name: 005-gateway
   annotations:
     argocd.argoproj.io/sync-wave: "5"
   finalizers:
