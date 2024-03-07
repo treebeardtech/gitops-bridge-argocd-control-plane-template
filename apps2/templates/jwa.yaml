@@ -8,10 +8,10 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-      source:
-        path: apps/jupyter/jupyter-web-app/upstream/overlays/istio
-        repoURL: https://github.com/kubeflow/manifests
-        targetRevision: 776d4f4
+  source:
+    path: apps/jupyter/jupyter-web-app/upstream/overlays/istio
+    repoURL: https://github.com/kubeflow/manifests
+    targetRevision: 776d4f4
   destination:
     namespace: argo-cd
     name: in-cluster
