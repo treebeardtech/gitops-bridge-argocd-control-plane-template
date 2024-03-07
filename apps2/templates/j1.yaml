@@ -1,0 +1,80 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: j3
+  namespace: argo-cd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1000"
+spec:
+  template:
+    spec:
+      serviceAccount: argocd-server
+      containers:
+      - name: check-sync
+        image: bitnami/kubectl
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          echo waiting
+          date
+          sleep 20
+          echo done
+          date
+      restartPolicy: Never
+  backoffLimit: 1
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 30
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: j2
+  namespace: argo-cd
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  template:
+    spec:
+      serviceAccount: argocd-server
+      containers:
+      - name: check-sync
+        image: bitnami/kubectl
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          echo waiting
+          date
+          sleep 20
+          echo done
+          date
+      restartPolicy: Never
+  backoffLimit: 1
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 30
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: j1
+  namespace: argo-cd
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  template:
+    spec:
+      serviceAccount: argocd-server
+      containers:
+      - name: check-sync
+        image: bitnami/kubectl
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          echo waiting
+          date
+          sleep 20
+          echo done
+          date
+      restartPolicy: Never
+  backoffLimit: 1
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 30
