@@ -16,6 +16,8 @@ spec:
         releaseName: "cert-manager"
         ignoreMissingValueFiles: true
         valueFiles: []
+        values: |
+          installCRDs: true
   destination:
     namespace: 'cert-manager'
     name: 'in-cluster'
