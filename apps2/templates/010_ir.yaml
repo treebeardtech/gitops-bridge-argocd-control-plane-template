@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 10-istio-resources
+  name: 010-istio-resources
   annotations:
     argocd.argoproj.io/sync-wave: "10"
   finalizers:
