@@ -13,8 +13,7 @@ gateway:
         helm:
           releaseName: "istio-ingressgateway"
           ignoreMissingValueFiles: true
-          valueFiles: []
-          values: |
+          valuesObject:
             service:
               type: LoadBalancer
             serviceAccount:
